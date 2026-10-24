@@ -31,19 +31,19 @@ From Starbucks to Instagram, from Virat Kohli's IPL contract to a ₹5 shampoo s
 <table align="center">
 <tr>
 <td align="center" width="33%">
-<a href="en/README.md"><img src="en/images/cover.png" alt="English edition cover" width="180"></a><br><br>
+<a href="en/"><img src="en/images/cover.png" alt="English edition cover" width="180"></a><br><br>
 <b>English</b><br>
-<a href="en/README.md"><b>Start reading →</b></a>
+<a href="en/"><b>Start reading →</b></a>
 </td>
 <td align="center" width="33%">
-<a href="hi/README.md"><img src="hi/images/cover.png" alt="हिन्दी संस्करण का कवर" width="180"></a><br><br>
+<a href="hi/"><img src="hi/images/cover.png" alt="हिन्दी संस्करण का कवर" width="180"></a><br><br>
 <b>हिन्दी</b> · Hindi<br>
-<a href="hi/README.md"><b>पढ़ना शुरू करें →</b></a>
+<a href="hi/"><b>पढ़ना शुरू करें →</b></a>
 </td>
 <td align="center" width="33%">
-<a href="gu/README.md"><img src="gu/images/cover.png" alt="ગુજરાતી આવૃત્તિનું કવર" width="180"></a><br><br>
+<a href="gu/"><img src="gu/images/cover.png" alt="ગુજરાતી આવૃત્તિનું કવર" width="180"></a><br><br>
 <b>ગુજરાતી</b> · Gujarati<br>
-<a href="gu/README.md"><b>વાંચવાનું શરૂ કરો →</b></a>
+<a href="gu/"><b>વાંચવાનું શરૂ કરો →</b></a>
 </td>
 </tr>
 </table>
