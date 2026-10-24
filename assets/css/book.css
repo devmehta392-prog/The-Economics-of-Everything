@@ -1,0 +1,528 @@
+/* The Economics of Everything — site theme
+   Black-and-white, matching the printed book. */
+
+:root {
+  --paper: #f7f5f0;
+  --white: #ffffff;
+  --ink: #141414;
+  --black: #111111;
+  --muted: #6d6a64;
+  --line: #dfdbd2;
+  --card: #efece5;
+  --sans: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --body-size: 1.25rem;
+  --body-leading: 1.7;
+  --measure: 40rem;
+}
+
+.lang-hi {
+  --sans: "Noto Sans Devanagari", "Archivo", system-ui, sans-serif;
+  --serif: "Noto Serif Devanagari", "EB Garamond", Georgia, serif;
+  --body-size: 1.125rem;
+  --body-leading: 1.95;
+}
+.lang-gu {
+  --sans: "Noto Sans Gujarati", "Archivo", system-ui, sans-serif;
+  --serif: "Noto Serif Gujarati", "EB Garamond", Georgia, serif;
+  --body-size: 1.125rem;
+  --body-leading: 1.95;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: var(--body-size);
+  line-height: var(--body-leading);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--ink); color: var(--paper); }
+
+/* ---------- Top bar ---------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem clamp(1rem, 4vw, 2.5rem);
+  background: rgba(247, 245, 240, 0.88);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+}
+.brand span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.brand svg { flex: none; }
+
+.langs {
+  display: inline-flex;
+  flex: none;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+}
+.langs a {
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: "Archivo", "Noto Sans Devanagari", "Noto Sans Gujarati", system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: background 0.15s, color 0.15s;
+}
+.langs a:hover { color: var(--ink); }
+.langs a.on { background: var(--ink); color: var(--paper); }
+
+/* ---------- Reading progress ---------- */
+
+.progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 20; }
+.progress span { display: block; height: 100%; width: 0; background: var(--ink); }
+
+/* ---------- Main column ---------- */
+
+.prose {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) 1.25rem 3rem;
+}
+
+.prose p { margin: 0 0 1.25em; }
+
+.prose a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: rgba(20, 20, 20, 0.35);
+  transition: text-decoration-color 0.15s;
+}
+.prose a:hover { text-decoration-color: currentColor; }
+
+.prose h1, .prose h2, .prose h3 {
+  font-family: var(--sans);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.prose h1 {
+  font-size: clamp(2.1rem, 5.5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.08;
+  margin: 0.4em 0 0.8em;
+}
+.lang-hi .prose h1, .lang-gu .prose h1 { line-height: 1.35; font-weight: 700; letter-spacing: 0; }
+.prose h2 {
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 2.6em 0 0.8em;
+}
+.lang-hi .prose h2, .lang-gu .prose h2 { line-height: 1.5; letter-spacing: 0; }
+.prose h3 { font-size: 1.2rem; font-weight: 700; margin: 2em 0 0.6em; }
+
+.prose hr {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+  margin: 2.5rem 0;
+}
+
+.prose strong { font-weight: 600; }
+
+.prose img { max-width: 100%; height: auto; }
+
+.prose code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.8em;
+  background: var(--card);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.prose ul, .prose ol { padding-left: 1.3em; margin: 0 0 1.4em; }
+.prose li { margin: 0.3em 0; }
+.prose li::marker { color: var(--muted); }
+
+sub { font-size: inherit; vertical-align: baseline; }
+
+/* ---------- Chapter pages ---------- */
+
+/* Breadcrumb */
+.kind-chapter .prose > p:first-child {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.kind-chapter .prose > p:first-child a { text-decoration: none; color: var(--muted); }
+.kind-chapter .prose > p:first-child a:hover { color: var(--ink); }
+.kind-chapter .prose > p:first-child + hr { margin: 1rem 0 2rem; }
+
+/* Chapter header illustration */
+.prose p[align="center"] { text-align: center; margin: 1.5rem 0 0.5rem; }
+.prose p[align="center"] img { mix-blend-mode: multiply; width: 260px; }
+
+/* Eyebrow label (INTRODUCTION, CONCLUSION …) */
+.kind-chapter .prose sub b {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+/* Drop cap on the opening paragraph (Latin script only) */
+.lang-en.kind-chapter .prose h1 + p::first-letter {
+  float: left;
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
+  font-size: 3.9em;
+  line-height: 0.82;
+  margin: 0.08em 0.1em 0 0;
+}
+
+/* Aside & Concept boxes */
+.prose blockquote {
+  margin: 2.2rem 0;
+  padding: 1.4rem 1.6rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--ink);
+  border-radius: 4px 12px 12px 4px;
+  font-size: 0.95em;
+}
+.prose blockquote p:last-child { margin-bottom: 0; }
+.prose blockquote > p:first-child > strong:only-child {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.lang-hi .prose blockquote > p:first-child > strong:only-child,
+.lang-gu .prose blockquote > p:first-child > strong:only-child {
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+.prose blockquote > p:nth-child(2) > strong:only-child {
+  font-family: var(--sans);
+  font-size: 1.15rem;
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  margin: 2rem 0 0.75rem;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.prose th {
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 2px solid var(--ink);
+  vertical-align: bottom;
+}
+.prose td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.prose tbody tr:hover td { background: rgba(0, 0, 0, 0.025); }
+.prose table + p {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 2.2rem;
+}
+@media (max-width: 680px) {
+  .prose table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
+/* Previous / Contents / Next */
+.prose > div[align="center"]:last-child > p,
+.prose > div[align="center"]:last-child {
+  text-align: center;
+}
+.prose > div[align="center"]:last-child p {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 0;
+  margin: 0;
+}
+.prose > div[align="center"]:last-child a {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.65rem 1.2rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.prose > div[align="center"]:last-child a:hover { background: var(--card); }
+.prose > div[align="center"]:last-child a:last-child { background: var(--ink); color: var(--paper); }
+.prose > div[align="center"]:last-child a:last-child:hover { background: #333; }
+.prose > div[align="center"]:last-child hr { display: none; }
+
+/* ---------- Hero (home + edition contents pages) ---------- */
+
+.kind-home .prose > div:first-child,
+.kind-toc .prose > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  grid-template-rows: 1fr repeat(4, auto) 1fr;
+  column-gap: clamp(2rem, 6vw, 4.5rem);
+  align-items: center;
+  text-align: left;
+  width: 100vw;
+  margin: calc(-1 * clamp(2rem, 6vw, 4rem)) 0 3rem calc(50% - 50vw);
+  padding: clamp(3rem, 8vw, 6rem) max(1.5rem, calc((100vw - 64rem) / 2));
+  background: var(--black);
+  color: #f2f2f2;
+}
+.kind-home .prose > div:first-child > *,
+.kind-toc .prose > div:first-child > * { grid-column: 2; margin: 0; }
+.kind-home .prose > div:first-child > :first-child,
+.kind-toc .prose > div:first-child > :first-child { grid-column: 1; grid-row: 1 / -1; }
+.kind-home .prose > div:first-child > :nth-child(2),
+.kind-toc .prose > div:first-child > :nth-child(2) { grid-row: 2; }
+.kind-home .prose > div:first-child > :nth-child(3),
+.kind-toc .prose > div:first-child > :nth-child(3) { grid-row: 3; }
+.kind-home .prose > div:first-child > :nth-child(4),
+.kind-toc .prose > div:first-child > :nth-child(4) { grid-row: 4; }
+.kind-home .prose > div:first-child > :nth-child(5),
+.kind-toc .prose > div:first-child > :nth-child(5) { grid-row: 5; }
+
+.kind-home .prose > div:first-child img,
+.kind-toc .prose > div:first-child img {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.kind-home .prose > div:first-child h1,
+.kind-toc .prose > div:first-child h1 {
+  color: #fff;
+  font-size: clamp(2.4rem, 6vw, 4.25rem);
+  margin-bottom: 0.35em;
+}
+.kind-home .prose > div:first-child em,
+.kind-toc .prose > div:first-child em {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: #c9c9c9;
+}
+.kind-home .prose > div:first-child > :nth-child(4),
+.kind-toc .prose > div:first-child > :nth-child(4) {
+  margin-top: 1.6rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.kind-home .prose > div:first-child p:has(img[src*="shields.io"]) { display: none; }
+
+/* nav links inside the edition hero */
+.kind-toc .prose > div:first-child > :nth-child(5) {
+  margin-top: 1.8rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: #888;
+}
+.kind-toc .prose > div:first-child a { color: #e6e6e6; text-decoration: none; }
+.kind-toc .prose > div:first-child a:hover { color: #fff; text-decoration: underline; }
+
+.kind-home .prose > div:first-child + hr,
+.kind-toc .prose > div:first-child + hr { display: none; }
+
+@media (max-width: 720px) {
+  .kind-home .prose > div:first-child,
+  .kind-toc .prose > div:first-child {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    text-align: center;
+    row-gap: 0.4rem;
+  }
+  .kind-home .prose > div:first-child > *,
+  .kind-toc .prose > div:first-child > * { grid-column: 1 !important; grid-row: auto !important; }
+  .kind-home .prose > div:first-child > :first-child,
+  .kind-toc .prose > div:first-child > :first-child { width: 58%; max-width: 230px; margin: 0 auto 2rem; }
+}
+
+/* ---------- Home: language shelf ---------- */
+
+.kind-home .prose table[align="center"] {
+  display: block;
+  margin: 2rem 0 1rem;
+  font-family: var(--sans);
+  overflow: visible;
+}
+.kind-home .prose table[align="center"] tbody { display: block; }
+.kind-home .prose table[align="center"] tr {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.kind-home .prose table[align="center"] tr:hover td { background: var(--white); }
+.kind-home .prose table[align="center"] td {
+  display: block;
+  width: auto;
+  padding: 1.25rem 1rem 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.kind-home .prose table[align="center"] td:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.35);
+}
+.kind-home .prose table[align="center"] td img {
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.5);
+}
+.kind-home .prose table[align="center"] td br + br { display: none; }
+.kind-home .prose table[align="center"] td b { display: inline-block; margin-top: 0.9rem; }
+.kind-home .prose table[align="center"] td a { text-decoration: none; }
+.kind-home .prose table[align="center"] td a:last-child b {
+  display: inline-block;
+  margin-top: 0.7rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.kind-home .prose table[align="center"] td :lang(hi),
+.kind-home .prose table[align="center"] td { font-family: "Archivo", "Noto Sans Devanagari", "Noto Sans Gujarati", sans-serif; }
+
+@media (max-width: 640px) {
+  .kind-home .prose table[align="center"] tr { grid-template-columns: 1fr; }
+  .kind-home .prose table[align="center"] td img { width: 55%; }
+}
+
+/* Home sections */
+.kind-home .prose h2 { margin-top: 1.4em; }
+
+/* ---------- Edition contents page ---------- */
+
+.kind-toc .prose > blockquote {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  font-size: 1.3em;
+  line-height: 1.5;
+  font-style: italic;
+  color: #3a3935;
+}
+.lang-hi.kind-toc .prose > blockquote,
+.lang-gu.kind-toc .prose > blockquote { font-style: normal; font-size: 1.15em; line-height: 1.8; }
+
+.kind-toc .prose ol, .kind-toc .prose ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+.kind-toc .prose ol { counter-reset: ch; border-top: 1px solid var(--line); }
+.kind-toc .prose ol li {
+  counter-increment: ch;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  align-items: baseline;
+  margin: 0;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.kind-toc .prose ol li::before {
+  content: counter(ch, decimal-leading-zero);
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.kind-toc .prose li strong { font-weight: 500; }
+.kind-toc .prose li a { text-decoration: none; }
+.kind-toc .prose li a:hover { text-decoration: underline; }
+.kind-toc .prose ul li { margin: 0.6rem 0; color: var(--muted); }
+.kind-toc .prose ul li a { color: var(--ink); }
+
+.prose details { margin: 1.5rem 0; }
+.prose summary {
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.prose details img { margin-top: 1rem; border-radius: 3px; box-shadow: 0 16px 30px -14px rgba(0,0,0,.5); }
+
+/* ---------- Footer ---------- */
+
+.site-foot {
+  margin-top: 2rem;
+  padding: 3.5rem 1.25rem 4rem;
+  text-align: center;
+  background: var(--black);
+  color: #9a9a9a;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+}
+.site-foot svg { color: #fff; }
+.site-foot p { margin: 0.4rem 0; }
+.site-foot .foot-title { color: #fff; font-weight: 700; font-size: 1rem; margin-top: 0.8rem; }
+.site-foot a { color: #d8d8d8; text-decoration: none; }
+.site-foot a:hover { color: #fff; text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Indic script refinements ---------- */
+/* Devanagari and Gujarati have no true italics or wide tracking; keep them upright and unspaced */
+.lang-hi .prose em, .lang-gu .prose em { font-style: normal; }
+.lang-hi .prose table + p, .lang-gu .prose table + p { font-style: normal; }
+.lang-hi.kind-toc .prose > div:first-child > :nth-child(4),
+.lang-gu.kind-toc .prose > div:first-child > :nth-child(4) { letter-spacing: 0.02em; font-size: 0.95rem; }
+.lang-hi .prose sub b, .lang-gu .prose sub b { letter-spacing: 0.04em; font-size: 0.85rem; }

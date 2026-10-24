@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{%- assign parts = page.path | split: '/' -%}
+{%- if parts.size > 1 -%}
+  {%- assign lang = parts[0] -%}
+  {%- assign file = parts[1] -%}
+{%- else -%}
+  {%- assign lang = 'en' -%}
+  {%- assign file = '' -%}
+{%- endif -%}
+{%- assign target = file | replace: 'README.md', '' | replace: '.md', '.html' -%}
+{%- assign kind = 'chapter' -%}
+{%- if file == '' -%}{%- assign kind = 'home' -%}{%- elsif file == 'README.md' -%}{%- assign kind = 'toc' -%}{%- endif -%}
+{%- if lang == 'hi' -%}
+  {%- assign book = 'हर चीज़ का अर्थशास्त्र' -%}{%- assign contents = 'विषय-सूची' -%}{%- assign home = 'मुख्य पृष्ठ' -%}
+{%- elsif lang == 'gu' -%}
+  {%- assign book = 'દરેક વસ્તુનું અર્થશાસ્ત્ર' -%}{%- assign contents = 'અનુક્રમણિકા' -%}{%- assign home = 'મુખ્ય પૃષ્ઠ' -%}
+{%- else -%}
+  {%- assign book = 'The Economics of Everything' -%}{%- assign contents = 'Contents' -%}{%- assign home = 'Home' -%}
+{%- endif -%}
+{%- assign base = site.baseurl -%}
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if kind == 'home' %}{{ site.title }} — Dev Mehta{% elsif page.title and page.title != book %}{{ page.title }} · {{ book }}{% else %}{{ book }}{% endif %}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta name="author" content="Dev Mehta">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta property="og:image" content="{{ site.github.url }}/en/images/cover.png">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='3'%3E%3Ccircle cx='32' cy='32' r='20'/%3E%3Ccircle cx='32' cy='32' r='13'/%3E%3Ccircle cx='32' cy='32' r='6'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+Devanagari:wght@500;700&family=Noto+Serif+Devanagari:wght@400;600&family=Noto+Sans+Gujarati:wght@500;700&family=Noto+Serif+Gujarati:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ base }}/assets/css/book.css">
+</head>
+<body class="lang-{{ lang }} kind-{{ kind }}">
+  {%- if kind == 'chapter' %}<div class="progress" aria-hidden="true"><span id="progress"></span></div>{% endif %}
+  <header class="topbar">
+    <a class="brand" href="{{ base }}/{% if kind != 'home' %}{{ lang }}/{% endif %}">
+      <svg viewBox="0 0 40 40" width="26" height="26" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="20" cy="20" r="18"/><circle cx="20" cy="20" r="12"/><circle cx="20" cy="20" r="6"/></g></svg>
+      <span>{{ book }}</span>
+    </a>
+    <nav class="langs" aria-label="Language">
+      <a href="{{ base }}/en/{{ target }}"{% if lang == 'en' and kind != 'home' %} class="on"{% endif %} lang="en">EN</a>
+      <a href="{{ base }}/hi/{{ target }}"{% if lang == 'hi' %} class="on"{% endif %} lang="hi">हिन्दी</a>
+      <a href="{{ base }}/gu/{{ target }}"{% if lang == 'gu' %} class="on"{% endif %} lang="gu">ગુજરાતી</a>
+    </nav>
+  </header>
+
+  <main class="prose">
+{{ content }}
+  </main>
+
+  <footer class="site-foot">
+    <svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="20" cy="20" r="18"/><circle cx="20" cy="20" r="12"/><circle cx="20" cy="20" r="6"/></g></svg>
+    <p class="foot-title">{{ book }}</p>
+    <p>© 2026 Dev Mehta · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> · <a href="https://github.com/devmehta392-prog/The-Economics-of-Everything">GitHub</a></p>
+  </footer>
+
+  {%- if kind == 'chapter' %}
+  <script>
+    (function () {
+      var bar = document.getElementById('progress');
+      function update() {
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+      }
+      document.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+  </script>
+  {%- endif %}
+</body>
+</html>

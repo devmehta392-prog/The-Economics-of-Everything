@@ -1,0 +1,12 @@
+title: The Economics of Everything
+description: A free book on the economics hiding in everyday life, from Starbucks to UPI. In English, Hindi and Gujarati.
+author: Dev Mehta
+lang: en
+
+kramdown:
+  input: GFM
+  parse_block_html: true
+  hard_wrap: false
+
+exclude:
+  - .gitignore
